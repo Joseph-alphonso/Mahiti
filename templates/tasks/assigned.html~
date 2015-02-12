@@ -1,0 +1,98 @@
+{% extends "tasks/main.html" %}
+{% block midpart %}
+  <div id="dashcontent"style="">
+
+        <div class="portlet box blue content-part" style="width:99%;height:602px; overflow:auto;overflow-x: hidden;">
+
+
+
+<script>
+    function actfunc(activate){
+        var check_perm = central_redirect_func('{{key}}', 'delete');
+        if (check_perm){
+            $.ajax({
+                    type:'GET',
+                    url:"/worktype/{{key}}/active/",
+                    data:{'active':activate},
+                    success:function(data){
+                        return replacefunc('{{key}}','/worktype/wt/');
+                    }
+            });
+            return false;
+        }
+    };
+</script>
+
+
+<script>
+function myFunction() {
+    alert("Selcet any thing");
+}
+</script>
+
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
+            <!--sitemap-->
+            <div class="breadcrumbs">
+                    <a class="home" href="#">Home</a>
+            </div>
+                <!-- main content -->
+                <!-- Work_Type -->
+                    <div class="maincontent">
+                        <h1>Configure Inventory</h1>
+                        <div class="operation">
+                            <a class="btnyellow" href="#">PDF</a> 
+                            <a class="btnblue" href="#">CSV</a>
+                        </div>
+                        <div class="portlet box blue">
+                        <div class="portlet-title"> Task </div>
+                        <a class="btngreen">Detail View</a>
+                        <div id="employee-designation-grid" class="grid-view">
+                        <div align = right><a title = "Print this Page" href="javascript:window.print()"><img src="/static/img/print-icon.png" height="25" width="25"></a></div>
+                                <h1>Assigned to {{ ta.assigned_by }} </h1>
+                                    <table class="items">
+                                          <thead>
+                                                <tr>
+                                                <th>Title</th>
+                                                <th>Project</th>
+                                                <th>Assigned to</th>
+                                                <th>Due date</th>
+                                                <th>Status</th>
+                                                <th>Estimated</th>
+                                                <th>Actual</th>
+                                                </tr>
+                                                       </thead>
+                                                <tr class="{% cycle 'odd' 'even'%}" align = "center">
+                                                    <td>{{ ta.title }}</td>
+                                                    <td>{{ ta.project }}</td>
+                                                    <td>{{ ta.assigned_by }}</td>
+                                                    <td>{{ ta.module }}</td>
+                                                    <td>{{ ta.due_date }}</td>
+                                                    <td>{{ ta.status }}</td>
+                                                    <td>{{ ta.estimated }}</td>
+                                                    <td>{{ ta.actual }}</td>
+                                                </tr>
+                                    </table>
+                                    
+                                    <a href="/tasks/"> <input type ="submit" class="btnsubmit" value="Back to the task list"></a>
+                                    
+                                    <div class="keys" style="display:none" title="">
+                                    <span>3</span><span>2</span><span>1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+{% endblock midpart %}
+

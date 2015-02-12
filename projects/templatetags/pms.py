@@ -1,0 +1,47 @@
+from django import template
+register = template.Library()
+
+from people.models import *
+from projects.models import Project
+from milestones.models import *
+
+@register.filter
+def get_client_list(request):
+
+    user = request.user.id
+    userprofile_obj = UserProfile.objects.get(user=user)
+    if userprofile_obj.access_level == '1':
+        client_list = Client.objects.all()
+        return client_list
+    else:
+        client_list = userprofile_obj.client
+        return client_list
+
+
+@register.filter
+def get_project_list(request):
+
+    user = request.user.id
+    userprofile_obj = UserProfile.objects.get(user=user)
+    if userprofile_obj.access_level == '1':
+        projects_list = Project.objects.all()
+        return projects_list
+    else:
+        project_list = userprofile_obj.project.all()
+        return project_list
+
+
+@register.filter
+def get_milestones_list(request):
+
+    user = request.user.id
+    userprofile_obj = UserProfile.objects.get(user=user)
+    if userprofile_obj.access_level == '1':
+        milestone_list = Milestone.objects.all()
+        return milestone_list
+    else:
+        milestone_list = userprofile_obj.get_milestones_list
+        print milestone_list
+        return milestone_list
+
+

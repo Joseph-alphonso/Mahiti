@@ -1,0 +1,67 @@
+{% extends "client/main.html" %}
+{% block content %}
+<div id="dashcontent">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Add New Designation</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/component.css">
+<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script type="text/javascript"src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.peity.min.js"></script> -->
+</head>
+<body>
+	<!--sitemap-->
+	<div class="breadcrumbs">
+		<a class="home" href="/home/">Home</a>
+		<a href="designation.html">Designations</a><a href="newdesg.html">Manage</a><span>Add New</span>
+            </div>
+            <!-- main content -->
+            <div class="maincontent">
+                <h1>Add New</h1>                  
+                <div class="portlet box blue">
+                    <div class="portlet-title"> Designations </div>
+                         <div id="employee-designation-grid" class="grid-view">
+                              <div>
+                                 <table class="items">
+                                      {% if client_details %}
+                                          <thead>
+                                           <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Edit</th>
+                                                <th>Status</th>
+                                                <th> Select </th>
+                                            </tr>
+                                           </thead>
+                                            {% for c in clien %}
+                                                <tr class="{% cycle 'odd' 'even'%}">
+                                                    
+                                                    <td>{{ pc.name }}</td>
+                                                    <td>{{ pc.description }}</td>
+                                                    <td><a href="/pclient_edit/{{pc.id}}/">Edit</a> </td>
+                                                    <td> <select name="id_status_{{key}}".name="status_name".class="select" style="width:150px;">   
+                                                    <option value="" selected ="selected" > Select Status</option>
+                                                     <option value="True" > Active</option> 
+                                                     <option value="False">Inactive </option> </td>
+                                                    </select>
+                                                    <td> <input type="checkbox" id ="mycheck" value="{{p.id}}" name="p"> </td>
+                                                </tr>
+                                          {% endfor %}
+                                      {% else %}
+                                            <td>
+                                          <td style="text-align:center;color:blue;text-size:14px;">No Client added Yet...</td>
+                                        {% endif %}
+                                    </table>
+                                    
+                              </div>
+                       </div>
+                  </div>
+             </div>
+</body>
+</html>
+</div>
+{% endblock content %}

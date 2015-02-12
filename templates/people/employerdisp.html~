@@ -1,0 +1,57 @@
+{% extends "main/base.html" %}
+{% block content %}
+  <div id="dashcontent"style="">
+
+        <div class="portlet box blue content-part" style="width:99%;height:602px; overflow:auto;overflow-x: hidden;">
+
+            <!--sitemap-->
+            <div class="breadcrumbs">
+                    <a class="home" href="/home/">Home</a>
+            </div>
+                <!-- main content -->
+                <!-- Work_Type -->
+                    <div class="maincontent">
+                        <h1>Configure Inventory</h1>
+                        <div class="operation"> 
+                            <a class="btnyellow" href="#">PDF</a> 
+                            <a class="btnblue" href="#">CSV</a>
+                        </div>
+                        <div class="portlet box blue">
+                        <div class="portlet-title"> Project </div>
+                        <a class="btngreen" href="/employer/add/" >Add New Employer</a>
+                        <div id="employee-designation-grid" class="grid-view">
+                                    <table class="items">
+                                      {% if emplayrs %}
+                                          <thead>
+                                           <tr>
+                                                <th> Name</th>
+                                                <th>Descriptions</th>
+                                                <th>Logo</th>
+                                                <th>Edit </th>
+                                            </tr>
+    
+                                                   </thead>
+                                            {% for e in emplayrs %}
+                                                <tr class="{% cycle 'odd' 'even'%}">
+                                                    
+                                                    <td>{{ e.name }}</td>
+                                                    <td>{{ e.description }}</td>
+                                                    <td>{{ e.logo }}</td>
+                                                    <td><a href="/employer/edit/?id={{e.id}}"><img src="/static/images/edit.jpg"></a> </td>
+                                                    <td><a href="/employer/delete/?id={{e.id}}"><img src="/static/images/delete.jpg"></a> </td>
+                                                </tr>
+                                          {% endfor %}
+                                      {% else %}
+                                          <td style="text-align:center;color:blue;text-size:14px;">No People  added Yet...</td>
+                                        {% endif %}
+                                    </table>
+                                    <div class="keys" style="display:none" title="">
+                                    <span>3</span><span>2</span><span>1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+{% endblock content %}
+

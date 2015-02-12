@@ -1,0 +1,77 @@
+{% extends "client/main.html" %}
+{% block content %}
+  <div id="dashcontent"style="">
+
+        <div class="portlet box blue content-part" style="width:99%;height:602px; overflow:auto;overflow-x: hidden;">
+
+            <!--sitemap-->
+            <div class="breadcrumbs">
+                    <a class="home" href="#">Home</a>
+            </div>
+                <!-- main content -->
+                <!-- Work_Type -->
+                    <div class="maincontent">
+                        <h1>Configure Inventory</h1>
+                        <div class="operation"> asfkalsdfnafdsklfnakl
+                            <a class="btnyellow" href="#">PDF</a> 
+                            <a class="btnblue" href="#">CSV</a>
+                        </div>
+                        <div class="portlet box blue">
+                        <div class="portlet-title"> Pclient </div>
+                        <a class="btngreen" href="/client-add/add/" >Add New Client</a>
+                        <div id="employee-designation-grid" class="grid-view">
+                                    <table class="items">
+                                      {% if client %}
+                                          <thead>
+                                           <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Address</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Website</th>
+                                                <th>Fax</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                                <th>Active</th>
+                                            </tr>
+    
+                                                   </thead>
+                                            {% for c in client %}
+                                                <tr class="{% cycle 'odd' 'even'%}">
+                                                    
+                                                    <td>{{ c.name }}</td>
+                                                    <td>{{ c.description }}</td>
+                                                    <td>{{ c.address }}</td>
+                                                    <td>{{ c.email }}</td>
+                                                    <td>{{ c.phone }}</td>
+                                                    <td>{{ c.website }}</td>
+                                                    <td>{{ c.fax }} </td>
+                                                    <td><a href="/client-add/edit/?id={{c.id}}">Edit</a> </td>
+                                                    <td><a href="/client-add/delete/{{c.id}}">Delete</a> </td>
+                                                    <td><a href="/client-add/active/{{c.id}}">Active</a> </td>
+                                                </tr>
+                                          {% endfor %}
+                                      {% else %}
+                                          <td style="text-align:center;color:blue;text-size:14px;">No Product Category added Yet...</td>
+                                        {% endif %}
+                                    </table>
+
+
+                                    <div class="keys" style="display:none" title="">
+                                    <span>3</span><span>2</span><span>1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+{% endblock content %}
+

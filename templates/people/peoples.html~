@@ -1,0 +1,77 @@
+{% extends "main/base.html" %}
+{% block content %}
+  <div id="dashcontent"style="">
+
+        <div class="portlet box blue content-part" style="width:99%;height:602px; overflow:auto;overflow-x: hidden;">
+            <!--sitemap-->
+            <div class="breadcrumbs">
+                    <a class="home" href="#">Home</a>
+            </div>
+                <!-- main content -->
+                <!-- Work_Type -->
+                    <div class="maincontent">
+                        <h1>Configure Inventory</h1>
+                        <div class="operation"> 
+                            <a class="btnyellow" href="#">PDF</a> 
+                            <a class="btnblue" href="#">CSV</a>
+                        </div>
+                        <div class="portlet box blue">
+                        <div class="portlet-title"> Project </div>
+                        <div id="employee-designation-grid" class="grid-view">
+                        
+    <div align="right">
+        <a title = "Print this Page" href="javascript:window.print()"><img src="/static/images/print.jpeg" height="25".width="25"></a>
+    </div>
+                                    <table class="items">
+                                          <thead>
+                                           <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Title</th>
+                                                <th>Address</th>
+                                                <th> Email</th>
+                                                <th>Phone</th>
+                                                <th>Network</th>
+                                                <th>Website</th>
+                                                <th>Notes</th>
+                                                <th>Profile Image</th>
+                                                <th> Client </th>
+                                            </tr>
+    
+                                                   </thead>
+                                                <tr class="{% cycle 'odd' 'even'%}">
+                                                    
+                                                    <td>{{ a.first_name }}</a></td>
+                                                    <td>{{ a.last_name }}</td>
+                                                    <td>{{ a.title }}</td>
+                                                    <td>{{ a.address }}</td>
+                                                    <td>{{ a.email }}</td>
+                                                    <td>{{ a.phone }}</td>
+                                                    <td>{{ a.network }}</td>
+                                                    <td>{{ a.website }}</td>
+                                                    <td>{{ a.notes }}</td>
+                                                    <td>{{ a.profile_image }}</td>
+                                                    <td>{{ a.client }}</td>
+                                                </tr>
+                                    </table>
+                                    <div align = "right">
+                                    <a href="/people/"> <input type="Submit" class="btnsubmit" value="Cancel & go back" />
+                                    </div>
+                                    
+                                    <div class="keys" style="display:none" title="">
+                                    <span>3</span><span>2</span><span>1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+{% endblock content %}
+

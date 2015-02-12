@@ -1,0 +1,115 @@
+{% extends "main.html" %}
+{% block midpart %}
+<script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#document_form").validate({
+            rules :
+            {
+            title : {required : true,maxlength:100, minlength:3},
+            project : {required : true},
+            //files : {required : true},
+            tags : {required : true},
+            notes : {required : true},
+            },
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    if ('{{edit}}'== 'True'){
+            $("#id_project").remove();
+            $("#id_tasks").remove();
+            $("#id_milestone").remove();
+            $('label[for=id_project]').remove();
+            $('label[for=id_tasks]').remove();
+            $('label[for=id_milestone]').remove();
+        }
+    $("#id_project").change(function(){
+             var id=$(this).val();
+             $.ajax({
+                    url : "/documents/ajaxmilestonetasks/",
+                    type : "GET",
+                    dataType: "json",
+                    data :{'id':id},
+                    success: function(data)
+                    {
+                        $('#id_milestone option').remove()
+                        $('<option>', {value : ''}).html('-------').appendTo('#id_milestone');
+                        if (data)
+                            {
+                                var res = data.res
+                                for (i=0;i<res.length;i++)
+                                {
+                                    $('<option>', {value : res[i].id }).html(res[i].title).appendTo('#id_milestone');
+                                }
+                            }
+                    }
+            })
+        return false;
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#id_milestone").change(function(){
+             var id=$(this).val();
+             $.ajax({
+                    url : "/documents/getajaxtasks/",
+                    type : "GET",
+                    dataType: "json",
+                    data :{'id':id},
+                    success: function(data)
+                    {
+                        $('#id_tasks option').remove()
+                        $('<option>', {value : ''}).html('-------').appendTo('#id_tasks');
+                        if (data)
+                            {
+                                var res = data.res
+                                for (i=0;i<res.length;i++)
+                                {
+                                    $('<option>', {value : res[i].id }).html(res[i].title).appendTo('#id_tasks');
+                                }
+                            }
+                    }
+            })
+        return false;
+    });
+});
+</script>
+
+
+    <div class="breadcrumbs" align="center"></div>
+        <div class="maincontent">
+            <h3>Documents</h3>
+            <div class="portlet box blue">
+                <div id="employee-designation-grid" class="breadcrumb">
+                    {% if msg %}<font color="red"><h3>{{msg}}</h3></font>{% endif %}
+                    <div>
+                        {% if task == "add" %}
+                            <form id="document_form" action ="/documents/documents/add/" method = "POST" enctype = "multipart/form-data" >{% csrf_token %}
+                        {% endif %}
+                        {% if task == "edit" %}
+                            <form id='document_form' action ="/documents/documents/edit/?id={{id_edit}}" method = "POST" enctype = "multipart/form-data" >{% csrf_token %}
+                        {% endif %}
+                        {% for field in form %}
+                            <div class="row" id="ex_col3_col4">
+                                <div>
+                                    <div>&nbsp;</div>{{ field.label_tag }}
+                                </div>
+                                <div>
+                                    <span> {{ field }}{% if field.errors %}{% endif %}<p style="color:red;">{{ field.errors|striptags }}</p></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <input type="Submit" class="btnsubmit" value="submit" />
+                        <a href="/documents/documents-home/" style="text-decoration:none;"><button type="button">Cancel</button> </a>
+                    </form><br>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

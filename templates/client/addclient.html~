@@ -1,0 +1,70 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div id="dashcontent">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Add New Designation</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/component.css">
+<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script type="text/javascript"src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.peity.min.js"></script> -->
+</head>
+<body>
+	<!--sitemap-->
+	<div class="breadcrumbs">
+		<a class="home" href="/home/">Home</a>
+		<a href="designation.html">Designations</a><a href="newdesg.html">Manage</a><span>Add New</span>
+            </div>
+            <!-- main content -->
+            <div class="maincontent">
+                <h1>Add New</h1>                  
+                <div class="portlet box blue">
+                    <div class="portlet-title"> Client </div>
+                         <div id="employee-designation-grid" class="grid-view">
+                         
+                                    {% if msg %}
+                                     <font color="red"><h3>{{msg}}</h3></font>
+                                    {% endif %}
+                                    
+                              <div>
+                              <ol>
+                              {% if task == "add" %}
+                                 <form  action ="/addclient/add/" method = "POST" encrypte = "multipart/form-data" >{% csrf_token %}
+                              {% endif %}
+                              {% if task == "edit" %}
+                                 <form action ="/addclient/edit/?id={{id_edit}}" method = "POST" encrypte = "multipart/form-data" >{% csrf_token %}
+                              {% endif %}
+                                
+                                            {{ form.as_p }}
+                                        
+                                     <input type="Submit" class="btnsubmit" value="Save" />
+                                    <a href="/addclient/add/"> <input name="addclient" type="Submit" class="btnsubmit" value="Save And Add Another" />
+                                     
+                                    
+                                  </form>
+                                    <a href="/client/"> <input type="Submit" class="btnsubmit" value="Cancel & go back to edit" />
+                                    </ol>
+                              </div>
+                       </div>
+                  </div>
+             </div>
+<script language="javascript">
+    function validate()
+        if (document.addclient.value = " ")
+        {
+            alert("please enter name");
+            document.addclient.t1.focus();
+            return(false);
+        }
+            
+        
+</script>
+
+</body>
+</html>
+</div>
+{% endblock %}

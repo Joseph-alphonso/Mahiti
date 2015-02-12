@@ -1,0 +1,37 @@
+from django.db import models
+from django import forms
+from models import *
+
+
+
+
+class MilestoneForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.Textarea(attrs={'cols':110,'rows':1}),required=True)
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols': 110, 'rows': 10}),required=False)
+    YESNO_CHOICES = ((False, 'In Progress'), (True, 'Complete'))
+    status = forms.ChoiceField(choices = YESNO_CHOICES, widget = forms.RadioSelect, initial='False')
+    client = forms.ModelChoiceField(queryset=Client.objects.all(),\
+                                   empty_label='Choose a client',\
+                                   required=False)
+    project = forms.ModelChoiceField(queryset=Project.objects.all(),\
+                                    empty_label='Choose a project')
+    owned_by = forms.ModelChoiceField(queryset=UserProfile.objects.all(),\
+                                    required=False)
+
+    class Meta:
+        model = Milestone
+        exclude = ('activate',)
+        widgets = {
+        'due_date': forms.DateInput(attrs={'class':'datepicker'}),
+        }
+
+
+class Milestone_DocumentForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Milestone_Document
+        exclude = ('milestone_documents',)
+
+
+#widget=forms.Select(attrs={'data-rel':'chosen'}),

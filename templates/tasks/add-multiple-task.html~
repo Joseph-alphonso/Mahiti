@@ -1,0 +1,512 @@
+{% extends "main.html" %}
+{% block midpart %}
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/static/resources/demos/style.css">
+
+
+
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<script>
+  $(function() {
+    $(".datepicker").datepicker();
+  });
+  //$("#yourinput").datepicker( "setDate" , "7/11/2011" );
+  </script><!--{{todays}}-->
+<script type="text/javascript">
+$(document).ready(function(){
+$("#task_form").validate({
+rules :
+{
+title: {required: true},
+client: {required: true},
+module: {required: true},
+project: {required: true},
+start_date : {required : true},
+},
+});
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+$('#id_title').attr('class','form-control')
+$('#id_client').attr('data-rel','chosen');
+//$('#id_project').attr('data-rel','chosen');
+//$('#id_module').attr('data-rel','chosen');
+$('#id_milestone').attr('data-rel','chosen');
+//$('#id_status').attr('data-rel','chosen');
+//$('#id_priority').attr('data-rel','chosen');
+//$('#id_owned_by').attr('data-rel','chosen');
+//$('#id_assigned_to').attr('data-rel','chosen');
+//$('#id_followed_by').attr('data-rel','chosen');
+$('#id_estimated').attr('class','form-control')
+$('#id_actual').attr('class','form-control')
+$('#id_summary').attr('class','form-control')
+$('#id_start_date').attr('class','form-control')
+$('#id_due_date').attr('class','form-control')
+
+
+
+});
+</script>
+<script>
+$(document).ready(function(){
+    $('#id_bug_reports').hide();
+    $('#id_module').change(function(){
+    var acc_level = $('#id_module').val()
+    if (acc_level == 4){
+        $('#id_bug_reports').show();
+    }
+    else{
+    $('#id_bug_reports').hide();
+    }
+    });
+});
+</script>
+
+
+
+
+<body>
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2><i class="glyphicon glyphicon-edit"></i> Multiple Task Form</h2>
+
+                <div class="box-icon">
+                    <a href="#" class="btn btn-setting btn-round btn-default"><i
+                            class="glyphicon glyphicon-cog"></i></a>
+                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                            class="glyphicon glyphicon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round btn-default"><i
+                            class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+             <legend><h3>Task 1:</h3></legend>
+       <form id="task_form" class="form-inline" role="form" action="." method="POST" enctype = "multipart/form-data" >{% csrf_token %}
+                            
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_title">Title:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{form.title}}
+                    </div>
+                    <p>
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_client">Client:</label> <p>
+                        {{form.client}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                      <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_project">Project:</label> <p>
+                        {{form.project}}
+                    </div>
+                </div>
+                    <p>
+                    
+                      <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_module">Module:</label> <p>
+                       {{form.module}}
+                    </div>
+                </div>
+                    <p>
+                    
+                     <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_start_date" >Start Date:</label> <p>
+                        <!--<input id="id_due_date" class="form-control" name="id_due_date">-->
+                        {{form.start_date}}
+                    </div>
+                    <p>
+                    
+                     <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_due_date" >Due Date:</label> <p>
+                        <!--<input id="id_due_date" class="form-control" name="id_due_date">-->
+                        {{form.due_date}}
+                    </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_milestone">Milestone:</label> <p>
+                       {{form.milestone}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_status">Status:</label> <p>
+                       {{form.status}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_priority">Priority:</label> <p>
+                       {{form.priority}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_owned_by">Owned By:</label> <p>
+                       {{form.owned_by}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_assigned_to">Assigned To:</label> <p>
+                       {{form.assigned_to}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_followed_by">Followed By:</label> <p>
+                       {{form.followed_by}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_estimated">Estimated:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{form.estimated}}
+                    </div>
+                    <p>
+                    
+    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_actual">Actual:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{form.actual}}
+                    </div>
+                    <p>
+                    
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_summary">Summary:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{form.summary}}
+                    </div>
+                    <p>
+                <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_bug_reports">Upload File:</label> <p>
+                        {{form.bug_reports}}
+                    </div>
+                </p>
+                <hr>
+                     <legend><h3>Task 2:</h3></legend>
+       <form id="task_form" class="form-inline" role="form" action="." method="POST" enctype = "multipart/form-data" >{% csrf_token %}
+                            
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_title">Title:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subform.title}}
+                    </div>
+                    <p>
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_client">Client:</label> <p>
+                        {{subform.client}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                      <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_project">Project:</label> <p>
+                        {{subform.project}}
+                    </div>
+                </div>
+                    <p>
+                    
+                      <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_module">Module:</label> <p>
+                       {{subform.module}}
+                    </div>
+                </div>
+                    <p>
+                    
+                     <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_start_date" >Start Date:</label> <p>
+                        <!--<input id="id_due_date" class="form-control" name="id_due_date">-->
+                        {{subform.start_date}}
+                    </div>
+                    <p>
+                    
+                     <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_due_date" >Due Date:</label> <p>
+                        <!--<input id="id_due_date" class="form-control" name="id_due_date">-->
+                        {{subform.due_date}}
+                    </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_milestone">Milestone:</label> <p>
+                       {{subform.milestone}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_status">Status:</label> <p>
+                       {{subform.status}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_priority">Priority:</label> <p>
+                       {{subform.priority}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_owned_by">Owned By:</label> <p>
+                       {{subform.owned_by}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_assigned_to">Assigned To:</label> <p>
+                       {{subform.assigned_to}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_followed_by">Followed By:</label> <p>
+                       {{subform.followed_by}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_estimated">Estimated:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subform.estimated}}
+                    </div>
+                    <p>
+                    
+    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_actual">Actual:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subform.actual}}
+                    </div>
+                    <p>
+                    
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_summary">Summary:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subform.summary}}
+                    </div>
+                    <p>
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_bug_reports">Upload File:</label> <p>
+                        {{form.bug_reports}}
+                    </div>
+                   <p>
+                <hr>
+                     <legend><h3>Task 3:</h3></legend>
+       <form id="task_form" class="form-inline" role="form" action="." method="POST" enctype = "multipart/form-data" >{% csrf_token %}
+                            
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_title">Title:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subbform.title}}
+                    </div>
+                    <p>
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_client">Client:</label> <p>
+                        {{subbform.client}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                      <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_project">Project:</label> <p>
+                        {{subbform.project}}
+                    </div>
+                </div>
+                    <p>
+                    
+                      <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_module">Module:</label> <p>
+                       {{subbform.module}}
+                    </div>
+                </div>
+                    <p>
+                    
+                     <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_start_date" >Start Date:</label> <p>
+                        <!--<input id="id_due_date" class="form-control" name="id_due_date">-->
+                        {{subbform.start_date}}
+                    </div>
+                    <p>
+                    
+                     <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_due_date" >Due Date:</label> <p>
+                        <!--<input id="id_due_date" class="form-control" name="id_due_date">-->
+                        {{subbform.due_date}}
+                    </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_milestone">Milestone:</label> <p>
+                       {{subbform.milestone}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_status">Status:</label> <p>
+                       {{subbform.status}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_priority">Priority:</label> <p>
+                       {{subbform.priority}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_owned_by">Owned By:</label> <p>
+                       {{subbform.owned_by}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_assigned_to">Assigned To:</label> <p>
+                       {{subbform.assigned_to}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                    <div class="controls">
+                     <label class="control-label" for="id_followed_by">Followed By:</label> <p>
+                       {{subbform.followed_by}}
+                    </div>
+                </div>
+                    <p>
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_estimated">Estimated:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subbform.estimated}}
+                    </div>
+                    <p>
+                    
+    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_actual">Actual:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subbform.actual}}
+                    </div>
+                    <p>
+                    
+                    
+                    
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_summary">Summary:</label> <p>
+                        <!--<input id="id_title" type="text" class="form-control" id="inputSuccess4" name="title">-->
+                        {{subbform.summary}}
+                    </div>
+                    <p>
+                <div class="form-group has-success has-feedback">
+                        <label class="control-label" for="id_bug_reports">Upload File:</label> <p>
+                        {{form.bug_reports}}
+                    </div>
+                <p>
+                <br>
+                              <input type="submit" class="btn btn-default" value="Save task" />
+                            <a href="/tasks/" style="text-decoration:none;"> <button type="button" class="btn btn-default">Cancel</button> </a><br></br>
+                           
+                </form>
+                                    
+                                  
+                                     
+                                    
+                              </div>
+        </div>
+    </div>
+    <!--/span-->
+</div><!--/row-->
+</div>
+</div>
+
+
+{% endblock midpart %}

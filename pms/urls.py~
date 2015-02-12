@@ -1,0 +1,140 @@
+from django.conf.urls import patterns, include, url
+
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'pms.views.home', name='home'),
+    # url(r'^pms/', include('pms.foo.urls')),
+
+    # Uncomment the admin/doc line below to enable admin documentation:
+    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # Uncomment the next line to enable the admin:
+    url(r'^admin/', include(admin.site.urls)),
+     
+    url(r'^home/$','client.views.home',name='home'),
+     
+    url(r'^documents/', include('documents.urls')),
+     # ---------------------------------Client----------------------------------------------#
+    
+    url(r'^client/(?P<task>(:?add|:?edit|:?delete|:?active))/$', 'client.views.client_details', name='client_details'),
+    url(r'^clients-home/$','client.views.client',name='client'),
+    url(r'^client-view/$','client.views.display_client',name='display_client'),
+    url(r'^client-view/(?P<id_delete>\d+)/$','client.views.deactivate_client',name='deactivate_client'),
+    url(r'^import/data/','client.views.import_data',name='import_data'),
+    url('^client-dashboard/$','client.views.view_client',name='view_client'),
+    url('^recently_viewed/$','client.views.recently_viewed',name='recently_viewed'),
+    
+    # ---------------------------------Project---------------------------------------------#
+    
+    url(r'^project/(?P<task>(:?add|:?edit|:?delete|:?active))/$', 'projects.views.project_details', name='project_details'),
+    url(r'^projects-home/$','projects.views.home',name='home'),
+    url(r'^manager/(?P<task>(:?add|:?edit|:?delete|:?active))/$', 'projects.views.project_manager', name='project_manager'),
+    url(r'^managers/$','projects.views.managers_details',name='managers_details'),
+    url(r'^project-profile/$','projects.views.project_profile',name='project_profile'),
+    url(r'^getprojects/$','projects.views.getprojects',name='getprojects'),
+    #url(r'^team/$','project.views.team',name='team'),
+    url(r'^modules_home/$','projects.views.getmodules',name='modules_home'),
+    url('^projects-dashboard/$','projects.views.view_project',name='view_project'),
+    #----------------------------------PEOPLE----------------------------------------------#
+    
+    url(r'^person/(?P<task>(:?add))/$', 'people.views.people_details', name='people_details'),
+    #url(r'^person/add/$', 'people.views.add_user_for_client', name='add_user_for_client'),
+    url(r'^persons-home/$','people.views.home',name='home'),
+    url(r'^view-person/$','people.views.display_people',name='display_people'),
+    url(r'^person_/(?P<task>(:?edit|:?delete|:?active))/$','people.views.useredit',name='useredit'),
+    url(r'^employer/(?P<task>(:?add|:?edit|:?delete|:?active))/$','people.views.employer',name='employer'),
+    url(r'^employers-home/$','people.views.employer_disp',name='employer_disp'),
+    url(r'^$','people.views.login_user',name='login_user'),
+    url(r'^login/$','people.views.login_user',name='login_user'),
+    url(r'^logout/$','people.views.logout_user',name='logout'),
+    url(r'^project-permission/(?P<task>(:?add|:?edit|:?delete|:?active))/$','people.views.employee_details',name='employee_details'),
+    url(r'^project-permissions-home/$','people.views.employees_list',name='employees_list'),
+    #url(r'^import/data/','people.views.import_data',name='import_data'),
+    
+    
+    
+    
+    url(r'^$', 'tasks.views.main', name='main'),
+    
+    
+    # url for tasks
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^main/$','tasks.views.main', name='main'),                    
+    url(r'^add/$', 'tasks.views.add', name='add'),                                               # add single task
+    url(r'^addm/$', 'tasks.views.addm', name='addm'),                                            # add multiple task
+    url(r'^tasks/$','tasks.views.k', name='task'),                                               # task view
+    url(r'^detail/$','tasks.views.detail',name='detail'),                                        # task detail view
+    url(r'^assign/$','tasks.views.assign',name='assign'),                                        # assigned view
+    url(r'^owned_by/$','tasks.views.kkk', name='task'),                                          # task ownedby
+    url(r'^task_follow/$','tasks.views.kkkk', name='task'),                                      # task follow
+    url(r'^gettasks/$','tasks.views.gettasks',name='gettasks'),
+    url(r'^getmilestones/$','tasks.views.getmilestones',name='getmilestones'),
+
+    url(r'^search/$', 'tasks.views.search', name='search'),                                      # search
+    url(r'^requests/$','tasks.views.kk', name='requests'),                                       # request
+    url(r'^radd/$', 'tasks.views.radd', name='radd'),                                            # add request
+    url(r'^request_view/$','tasks.views.request_view',name='request_view'),                      # request view
+    url(r'^edit/(?P<id_edit>\d+)/$','tasks.views.edit', name='edit'),                            # edit task
+    url(r'^edit_request/(?P<id_edit>\d+)/$','tasks.views.redit', name='redit'),                  # edit request
+#    url(r'^deletetasks/(?P<id_delete>\d+)/$','documents.views.deletetasks', name='deletetasks'),
+
+    # url for milestones
+    url(r'^milestones/$','milestones.views.mile', name='mile'),
+    url(r'^view/$','milestones.views.view',name='view'),
+    url(r'^overdueviews/$','milestones.views.overdueview',name='overdueview'),
+    url(r'^addmilestone/$', 'milestones.views.addmilestone', name='addmilestone'),
+    url(r'^editmilestone/(?P<id_edit>\d+)/$','milestones.views.editmilestone', name='editmilestone'),
+#    url(r'^deletemilestone/(?P<id_delete>\d+)/$','documents.views.deletemilestone', name='deletemilestone'),
+    url(r'^owned_by_me/$','milestones.views.mkk', name='mkk'),                                          # task ownedby
+    url(r'^deactive-milestone/(?P<id_delete>\d+)/$','milestones.views.deletemilestones',name='deletemilestones'),
+    url(r'^active-milestone/(?P<id_active>\d+)/$','milestones.views.activemilestones',name='activemilestones'),
+    url(r'^gettasks/$','milestones.views.gettasks',name='gettasks'),
+    url(r'^getmilestones/$','milestones.views.getmilestones',name='getmilestones'),
+    url(r'^getpeople/$','milestones.views.getpeople',name='getpeople'),
+    url(r'^import/milestones/$','milestones.views.import_data_m',name='import_data_m'),
+    url(r'^milestones/documents/$','milestones.views.milestone_documents', name='milestone_documents'),
+    url(r'^addmilestonedocument/$', 'milestones.views.addmilestonedocument', name='addmilestonedocument'),
+    url(r'^editmilestonedocument/(?P<id_edit>\d+)/$','milestones.views.editmilestonedocument', name='editmilestonedocument'),
+    url(r'^milestones wide view/$','milestones.views.wide_view', name='wide_view'),
+    url(r'^over due/$','milestones.views.overdueview', name='overdueview'),
+
+
+#---------------------------Times----------------------------------------#
+    url(r'^times/$','times.views.tim', name='tim'),
+    url(r'^addtimes/$', 'times.views.addtimes', name='addtimes'),
+    url(r'^addmtimes/$', 'times.views.addmtimes', name='addmtimes'),                                            # add multiple times
+    url(r'^edittimes/(?P<id_edit>\d+)/$','times.views.edittimes', name='edittimes'),
+    url(r'^time view/$','times.views.timeview',name='timeview'),
+    url(r'^Weekly hour graph/$', 'times.views.whg', name='whg'),
+    url(r'^Manage time/$','times.views.mtim', name='mtim'),
+    url(r'^Active timers/$', 'times.views.activetimer', name='activetimer'),
+    url(r'^Missing timesheets/$', 'times.views.missingtime', name='missingtime'),
+    url(r'^Submitted/$', 'times.views.sub', name='sub'),
+    #url(r'^Manage time/(?P<id_submit>\d+)/$','times.views.current_week', name='current_week'),
+    url(r'^Manage_time/$','times.views.current_week', name='current_week'),
+    
+
+
+#----------------mastermodule---------------------------
+    url(r'^budgets/$','mastermodule.views.budget_details',name='budget_details'),
+    url(r'^budget/(?P<task>(:?add|:?edit|:?delete|:?active))/$', 'mastermodule.views.budget', name='budget'),
+    url(r'^task-stauses-home/$','mastermodule.views.task_staus_details',name = 'task_staus_details'),
+    url(r'^task-statuses/(?P<task>(:?add|:?edit|:?delete|:?active))/$','mastermodule.views.task_statuses',name='task_statuses'),
+    url(r'^modules-home/$','mastermodule.views.modules_details',name='modules_details'),
+    url(r'^modules/(?P<task>(:?add|:?edit|:?delete|:?active))/$','mastermodule.views.modules',name='modules'),
+    
+    
+    # --------------------Invoices ----------------------------------#
+    url(r'^invoices-home/$','invoice.views.invoices_details',name='invoices_details'),
+    url(r'^invoice/$','invoice.views.invoice_add',name='invoice_add'),
+    url(r'^invoice_edit/(?P<id_edit>\d+)/$','invoice.views.invoice_edit',name='invoice_edit'),
+    url(r'^invoice_delete/(?P<id_delete>\d+)/$','invoice.views.invoice_delete', name='invoice_delete'),
+    url(r'^import/invoice/','invoice.views.import_data',name='import_data'),
+)
+    
+#-------------Static files---------------------------------------#
+urlpatterns += patterns('',(r'^static/(?P<path>,*)$', 'django.views.static.serve', {'document_root' : 'static'}),)

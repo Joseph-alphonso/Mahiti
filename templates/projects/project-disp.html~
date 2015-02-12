@@ -1,0 +1,78 @@
+{% extends "projects/main.html" %}
+{% block content %}
+  <div id="dashcontent"style="">
+
+        <div class="portlet box blue content-part" style="width:99%;height:602px; overflow:auto;overflow-x: hidden;">
+
+            <!--sitemap-->
+            <div class="breadcrumbs">
+                    <a class="home" href="#">Home</a>
+            </div>
+                <!-- main content -->
+                <!-- Work_Type -->
+                    <div class="maincontent">
+                        <h1>Configure Inventory</h1>
+                        <div class="operation"> 
+                            <a class="btnyellow" href="#">PDF</a> 
+                            <a class="btnblue" href="#">CSV</a>
+                        </div>
+                        <div class="portlet box blue">
+                        <div class="portlet-title"> Project </div>
+                        <a class="btngreen" href="/project-add/add/" >Add New Project</a>
+                        <div id="employee-designation-grid" class="grid-view">
+                                    <table class="items">
+                                      {% if projects %}
+                                          <thead>
+                                           <tr>
+                                                <th>Name</th>
+                                                <th>Project_Status</th>
+                                                <th>Billable</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Employee</th>
+                                                <th>Client</th>
+                                                <th>Project_Manager</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                                <th>Active</th>
+                                            </tr>
+    
+                                                   </thead>
+                                            {% for p in projects %}
+                                                <tr class="{% cycle 'odd' 'even'%}">
+                                                    
+                                                    <td>{{ p.name }}</td>
+                                                    <td>{{ p.project_status }}</td>
+                                                    <td>{{ p.billable }}</td>
+                                                    <td>{{ p.start_date }}</td>
+                                                    <td>{{ p.end_date }}</td>
+                                                    <td>{{ p.budget }}</td>
+                                                    <td>{{ p.client }} </td>
+                                                    <td><a href="/project-add/edit/?id={{p.id}}">Edit</a> </td>
+                                                    <td><a href="/project-add/delete/?id={{p.id}}">Delete</a> </td>
+                                                    <td><a href="/project-add/active/?id={{p.id}}">Active</a> </td>
+                                                </tr>
+                                          {% endfor %}
+                                      {% else %}
+                                          <td style="text-align:center;color:blue;text-size:14px;">No Project  added Yet...</td>
+                                        {% endif %}
+                                    </table>
+
+
+                                    <div class="keys" style="display:none" title="">
+                                    <span>3</span><span>2</span><span>1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+{% endblock content %}
+
